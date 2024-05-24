@@ -1,10 +1,9 @@
 const express = require('express')
+const controller = require('../../Controllers/client/home.controller')
 const router = express.Router()
 
 
-router.get('/',(req, res) => {
-    res.render('client/pages/home/index.pug') 
-})
+router.get('/',controller.index)
 
 
 module.exports = router;
