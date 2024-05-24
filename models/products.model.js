@@ -32,7 +32,7 @@ const Product_schema = new mongoose.Schema(
 );
 
 
-const Product = mongoose.model("Product",Product_schema,"products")
+const Product = mongoose.model("Product",Product_schema,"products") // argu3 là tên connection trong db
 
 
 module.exports = Product;
