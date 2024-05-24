@@ -1,7 +1,12 @@
 const express = require('express');
 require("dotenv").config();
+
 const route = require('./routes/client/index.route')
 
+
+//! Mongoose là thằng trung gian để kết nổi với database
+const database = require("./config/database")
+database.connect();
 
 const app = express()
 const port = process.env.PORT ;
