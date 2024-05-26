@@ -8,7 +8,7 @@ if(buttonStatus.length > 0) {
         // console.log(button)  // 3 cái  button trong html
         button.addEventListener("click", () => {
             const status = button.getAttribute("button-status") // value of button-status
-            console.log(status)
+            //console.log(status)
             // gán lên link
             if(status){
                 url.searchParams.set("status", status)

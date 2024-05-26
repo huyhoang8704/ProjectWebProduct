@@ -5,7 +5,7 @@ module.exports = (query, find) =>{
 
         const regex = new RegExp(keyword , "i")
 
-        find.title = regex
+        find.title = regex // gán title vô trong find 
     }
     return keyword
 }

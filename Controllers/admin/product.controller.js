@@ -34,7 +34,8 @@ const index = async (req , res) => {
     res.render('admin/pages/products/index.pug' , {
         pageTitle : "Trang danh sách sản phẩm",
         products : products,
-        filterStatus : filterStatus
+        filterStatus : filterStatus,
+        keyword : keyword,
     }) 
 }
 
