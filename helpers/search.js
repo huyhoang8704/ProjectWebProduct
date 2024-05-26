@@ -1,7 +1,7 @@
-module.exports = (query, find) =>{
+module.exports = (req, find) =>{
     let keyword = "";
-    if(query.keyword){
-        keyword = query.keyword
+    if(req.query.keyword){
+        keyword = req.query.keyword
 
         const regex = new RegExp(keyword , "i")
 

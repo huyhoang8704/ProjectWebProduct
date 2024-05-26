@@ -1,4 +1,4 @@
-module.exports = (query) => {
+module.exports = (req) => {
     let filterStatus = [
         {
             name : "Tất cả",
@@ -16,8 +16,8 @@ module.exports = (query) => {
             class: ""
         },        
     ]
-    if (query.status){
-        const index = filterStatus.findIndex(index => index.status === query.status)
+    if (req.query.status){
+        const index = filterStatus.findIndex(index => index.status === req.query.status)
         //console.log(index)  // active = 1 , inactive = 2 , "" =0
         filterStatus[index].class = "active"; // truyền active vô key class 
     }

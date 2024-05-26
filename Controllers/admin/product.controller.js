@@ -11,9 +11,9 @@ const index = async (req , res) => {
         deleted : "false"
     }
     // FilterStatus
-    const filterStatus = filterStatusHelpers(req.query);
+    const filterStatus = filterStatusHelpers(req);
     // Search
-    const keyword = searchHelpers(req.query , find)
+    const keyword = searchHelpers(req , find)
     // Pagination
     const countProducts = await Product.countDocuments(find);
     let objectPagination = paginationHelpers(
