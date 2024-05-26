@@ -90,6 +90,14 @@ block main
                                         class="btn btn-danger btn-sm ml-1"
                                         data-id = item.id
                                         button-delete
+                           
                                     ) Xóa
     +pagination(pagination)
+    form(
+        action="" 
+        method ="POST"
+        id = "form-change-status"
+        data-path = `${prefixAdmin}/products/change-status`
+    )
     script(src="/admin/js/script.js")
+    script(src="/admin/js/product.js")

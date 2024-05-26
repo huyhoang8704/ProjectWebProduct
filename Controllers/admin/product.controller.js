@@ -48,7 +48,19 @@ const index = async (req , res) => {
         pagination : objectPagination,
     }) 
 }
+//! [GET] /admin/products/change-status/:status/:id
+//http://localhost:3000/admin/products/change-status/active/1 => req.params
+const changeStatus = async (req , res) =>{
+    const status = req.params.status    // active
+    const id = req.params.id            // 1
+
+    await Product.updateOne({_id : id} , {status : status})
+    
+    res.redirect("back")
+}
+
 
 module.exports = {
     index,
+    changeStatus
 }
