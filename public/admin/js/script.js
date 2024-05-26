@@ -1,10 +1,10 @@
 //! Button status
-const buttonStatus = document.querySelectorAll("[button-status]")
+const buttonStatus = document.querySelectorAll("[button-status]") // lấy ra 5 thẻ html có atttribute là button-status
 if(buttonStatus.length > 0) {
     let url = new URL(window.location.href); // phân tích href
 
 
-    buttonStatus.forEach(button  => {
+    buttonStatus.forEach(button  => {  // duyệt qua từng button
         // console.log(button)  // 3 cái  button trong html
         button.addEventListener("click", () => {
             const status = button.getAttribute("button-status") // value of button-status
@@ -39,5 +39,21 @@ if (formSearch){
         }
         window.location.href = url.href
 
+    })
+}
+
+//! Pagination
+const buttonPagination = document.querySelectorAll("[button-pagination]")
+
+if(buttonPagination){
+    let url = new URL(window.location.href); // phân tích href
+
+    buttonPagination.forEach(button => {
+        button.addEventListener("click", () => {
+            const page = button.getAttribute("button-pagination")
+            if(page) url.searchParams.set("page",page)
+            else     url.searchParams.delete("page")
+            window.location.href = url.href
+        })
     })
 }
