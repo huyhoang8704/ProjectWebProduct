@@ -16,7 +16,6 @@ const port = process.env.PORT ;
 // method-override
 app.use(methodOverride('_method'))
 // express-flash
-app.use(cookieParser())
 app.use(cookieParser('keyboard cat'));
 app.use(session({ cookie: { maxAge: 60000 }}));
 app.use(flash())
