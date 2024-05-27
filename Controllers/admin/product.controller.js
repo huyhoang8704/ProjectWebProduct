@@ -58,9 +58,16 @@ const changeStatus = async (req , res) =>{
     
     res.redirect("back")
 }
+//! [DELETE] /admin/products/delete/:id
+const deleteItem = async (req , res)  => {
+    const id = req.params.id
+    await Product.updateOne({_id : id} , {deleted : "true"})
+    res.redirect("back")
+}
 
 
 module.exports = {
     index,
-    changeStatus
+    changeStatus,
+    deleteItem,
 }
