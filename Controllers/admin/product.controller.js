@@ -2,7 +2,7 @@ const Product = require("../../models/products.model")
 const filterStatusHelpers = require("../../helpers/filterStatus");
 const searchHelpers = require("../../helpers/search");
 const paginationHelpers = require("../../helpers/pagination");
-
+const systemConfig = require("../../config/system")
 
 
 //! [GET] /admin/products
@@ -70,9 +70,34 @@ const deleteItem = async (req , res)  => {
     res.redirect("back")
 }
 
+//! [GET] /admin/products
+const create = async (req , res) => {
+
+    res.render('admin/pages/products/create.pug' , {
+        pageTitle : "Trang tạo sản phẩm",
+    }) 
+}
+//! [POST] /admin/products
+const createPOST = async (req , res) => {
+    req.body.price = parseInt(req.body.price)
+    req.body.discountPercentage = parseInt(req.body.discountPercentage)
+    req.body.stock = parseInt(req.body.stock)
+    if(req.body.position == '') {
+        req.body.position = await Product.countDocuments() + 1;
+    } else {
+        req.body.position = parseInt(req.body.position)
+    }
+    const product = new Product(req.body)
+    await product.save();
+    req.flash('success', 'Tạo sản phẩm thành công!');
+    res.redirect(`${systemConfig.prefixAdmin}/products`)
+}
+
 
 module.exports = {
     index,
     changeStatus,
     deleteItem,
+    create,
+    createPOST
 }
