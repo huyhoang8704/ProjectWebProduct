@@ -19,4 +19,10 @@ router.patch(
     '/edit/:id',
     validate.createPOST,
     controller.editPatch)
+//detail
+router.get('/detail/:id',controller.detail)
+
+
+
+
 module.exports = router;
