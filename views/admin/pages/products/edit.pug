@@ -6,7 +6,7 @@ include ../../mixins/alert.pug
 block main
     +alert-error(3000)
     +alert-success(3000)
-    h1(class = "mb-4") Chỉnh sửa sản phẩm 
+    h1(class = "mb-4") Chỉnh sửa sản phẩm #{product.title}
 
     form(
         action = `${prefixAdmin}/products/edit/${product.id}?_method=PATCH`

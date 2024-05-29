@@ -77,7 +77,7 @@ const create = async (req , res) => {
         pageTitle : "Trang tạo sản phẩm",
     }) 
 }
-//! [POST] /admin/products
+//! [POST] /admin/products/create
 const createPOST = async (req , res) => {
     req.body.price = parseInt(req.body.price)
     req.body.discountPercentage = parseInt(req.body.discountPercentage)
@@ -92,12 +92,47 @@ const createPOST = async (req , res) => {
     req.flash('success', 'Tạo sản phẩm thành công!');
     res.redirect(`${systemConfig.prefixAdmin}/products`)
 }
+//! [GET] /admin/products/edit
+const edit = async (req , res) => {
+    try {
+        const find = {
+            deleted: false,
+            _id: req.params.id
+        }
+        const product = await Product.findOne(find)
+    
+    
+        res.render('admin/pages/products/edit.pug' , {
+            pageTitle : "Trang chỉnh sửa sản phẩm",
+            product : product,
+        }) 
+    } catch (error) {
+        res.redirect(`${systemConfig.prefixAdmin}/products`)
+    }
+}
+//! [PATCH] /admin/products/edit
+const editPatch = async (req , res) => {
+    const id = req.params.id
+    req.body.price = parseInt(req.body.price)
+    req.body.discountPercentage = parseInt(req.body.discountPercentage)
+    req.body.stock = parseInt(req.body.stock)
+    req.body.position = parseInt(req.body.position)
 
+    try {
+        await Product.updateOne({_id : id}, req.body)
+        req.flash('success', 'Cập nhật thành công!');
+    } catch (error) {
+        req.flash('error', 'Cập nhật thất bại!');
+    }
+    res.redirect("back")
+}
 
 module.exports = {
     index,
     changeStatus,
     deleteItem,
     create,
-    createPOST
+    createPOST,
+    edit,
+    editPatch
 }

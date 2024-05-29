@@ -13,4 +13,10 @@ router.post(
     validate.createPOST,
     controller.createPOST
 )
+// edit
+router.get('/edit/:id',controller.edit)
+router.patch(
+    '/edit/:id',
+    validate.createPOST,
+    controller.editPatch)
 module.exports = router;
