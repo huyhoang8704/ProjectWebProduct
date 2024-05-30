@@ -17,7 +17,30 @@ const index = async (req , res) => {
         products : products,
     }) 
 }
+const detail = async (req , res) => {
+    // const slug = req.params.slug
+    // console.log(slug)
+    try {
+        const find = {
+            deleted: false,
+            slug : slug
+        }
+        const product = await Product.findOne(find)
+    
+    
+        res.render('admin/pages/products/detail.pug' , {
+            pageTitle : "Trang chi tiết sản phẩm",
+            product : product,
+        }) 
+    } catch (error) {
+        res.redirect(`products`)
+    }
+}
+
+
+
 
 module.exports = {
     index,
+    detail,
 }
