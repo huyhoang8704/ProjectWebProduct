@@ -31,7 +31,7 @@ const index = async (req , res) => {
     if(req.query.sortKey && req.query.sortValue){
         sort[req.query.sortKey] = req.query.sortValue
     } else {
-        sort[req.query.sortKey] = "desc"
+        sort.position = "desc"
     }
 
     const products = await Product
