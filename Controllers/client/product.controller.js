@@ -18,22 +18,23 @@ const index = async (req , res) => {
     }) 
 }
 const detail = async (req , res) => {
-    // const slug = req.params.slug
+    const slug = req.params.slug
     // console.log(slug)
     try {
         const find = {
             deleted: false,
-            slug : slug
+            slug : slug,
+            status : "active",
         }
         const product = await Product.findOne(find)
+        // console.log(product)
     
-    
-        res.render('admin/pages/products/detail.pug' , {
-            pageTitle : "Trang chi tiết sản phẩm",
+        res.render('client/pages/products/detail.pug' , {
+            pageTitle : product.title,
             product : product,
         }) 
     } catch (error) {
-        res.redirect(`products`)
+        res.redirect(`/products`)
     }
 }
 

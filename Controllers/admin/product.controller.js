@@ -127,7 +127,7 @@ const editPatch = async (req , res) => {
     res.redirect("back")
 }
 
-//! [GET] /admin/products/edit
+//! [GET] /admin/products/detail
 const detail = async (req , res) => {
     try {
         const find = {
@@ -138,7 +138,7 @@ const detail = async (req , res) => {
     
     
         res.render('admin/pages/products/detail.pug' , {
-            pageTitle : "Trang chi tiết sản phẩm",
+            pageTitle : product.title,
             product : product,
         }) 
     } catch (error) {
