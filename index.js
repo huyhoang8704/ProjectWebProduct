@@ -22,11 +22,11 @@ app.use(flash())
 // bodyParse 
 app.use(bodyParser.urlencoded({ extended: false }))
 // pug
-app.set('views', './views');
+app.set('views', `${__dirname}/views`);
 app.set('view engine', 'pug');
 
 // File static
-app.use(express.static("public"));
+app.use(express.static(`${__dirname}/public`));
 
 // App local (để pug sử dụng dc)
 const systemconfig = require("./config/system")
