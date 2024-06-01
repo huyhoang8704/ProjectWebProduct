@@ -6,6 +6,7 @@ var flash = require('express-flash')
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var session = require('express-session')
+var path = require('path')
 
 // Mongoose là thằng trung gian để kết nổi với database
 const database = require("./config/database")
@@ -15,11 +16,13 @@ const app = express()
 const port = process.env.PORT ;
 // method-override
 app.use(methodOverride('_method'))
-// express-flash
+// express-flash  // thông báo
 app.use(cookieParser('keyboard cat'));
 app.use(session({ cookie: { maxAge: 60000 }}));
 app.use(flash())
-// bodyParse 
+// TinyMCE  : tạo phông chữ cho description
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+// bodyParse req.body
 app.use(bodyParser.urlencoded({ extended: false }))
 // pug
 app.set('views', `${__dirname}/views`);
