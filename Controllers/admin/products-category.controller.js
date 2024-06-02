@@ -16,6 +16,7 @@ const index = async (req , res) => {
         records : records
     })
 }
+//! [GET] /admin/products-category/create
 const create = async (req , res) => {
     res.render('admin/pages/products-category/create.pug', {
         pageTitle : "Tạo danh mục sản phẩm",
