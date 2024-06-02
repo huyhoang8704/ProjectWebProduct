@@ -1,9 +1,10 @@
 const Product = require("../../models/products.model")
+const ProductCategory  =require('../../models/products-category.model')
 const filterStatusHelpers = require("../../helpers/filterStatus");
 const searchHelpers = require("../../helpers/search");
 const paginationHelpers = require("../../helpers/pagination");
 const systemConfig = require("../../config/system")
-
+const createTreeHelpers = require("../../helpers/createTree")
 
 //! [GET] /admin/products
 const index = async (req , res) => {
@@ -70,11 +71,20 @@ const deleteItem = async (req , res)  => {
     res.redirect("back")
 }
 
-//! [GET] /admin/products
+//! [GET] /admin/products/create
 const create = async (req , res) => {
+    let find = {
+        deleted : false,
+    }
+
+    const records = await ProductCategory.find(find)
+    const newRecords = createTreeHelpers.tree(records)
+
+
 
     res.render('admin/pages/products/create.pug' , {
         pageTitle : "Trang tạo sản phẩm",
+        category : newRecords,
     }) 
 }
 //! [POST] /admin/products/create
