@@ -110,11 +110,17 @@ const edit = async (req , res) => {
             _id: req.params.id
         }
         const product = await Product.findOne(find)
+        const records = await ProductCategory.find({
+            deleted : false,
+        })
+        const newRecords = createTreeHelpers.tree(records)
     
-    
+
+
         res.render('admin/pages/products/edit.pug' , {
             pageTitle : "Trang chỉnh sửa sản phẩm",
             product : product,
+            category : newRecords,
         }) 
     } catch (error) {
         res.redirect(`${systemConfig.prefixAdmin}/products`)
