@@ -33,11 +33,40 @@ const createPOST = async (req , res) => {
         req.flash('error', 'Tạo nhóm quyền thất bại!');
     }
 }
-
-
+const edit = async (req , res) => {
+    try {
+        let find = {
+            deleted : false,
+            _id : req.params.id
+        }
+    
+        const role = await Role.findOne(find)
+    
+    
+        res.render('admin/pages/roles/edit.pug' , {
+            pageTitle : "Chỉnh sửa nhóm quyền",
+            role : role
+        })
+    } catch (error) {
+        res.redirect(`${systemConfig.prefixAdmin}/products`)
+    }
+    
+}
+const editPatch = async (req , res) => {
+    const id = req.params.id
+    try {
+        await Role.updateOne({_id : id}, req.body)
+        req.flash('success', 'Cập nhật thành công!');
+    } catch (error) {
+        req.flash('error', 'Cập nhật thất bại!');
+    }
+    res.redirect("back")
+}
 
 module.exports = {
     index,
     create,
-    createPOST
+    createPOST,
+    edit,
+    editPatch,
 }
