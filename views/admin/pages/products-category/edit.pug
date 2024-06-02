@@ -1,0 +1,102 @@
+extends ../../layouts/default.pug  
+include ../../mixins/alert.pug
+include ../../mixins/select-tree.pug
+
+ 
+
+block main
+    +alert-success(3000)
+    +alert-error(3000)
+    h1(class = "mb-4") Chỉnh sửa danh mục mới sản phẩm #{product.title}
+    form(
+        action = `${prefixAdmin}/products-category/edit/${product.id}?_method=PATCH`
+        method = "POST"
+    )
+        div(class = "form-group")
+            label(for = "title") Tiêu đề
+            input(
+                type = "text"
+                class = "form-control"
+                id = "title"
+                name = "title"
+                value = product.title
+                required
+            )
+
+        div(class = "form-group")
+            label(for = "parent_id") Danh mục cha
+            select(
+                name = "parent_id"
+                id = "parent_id"
+                class = "form-control"
+            )
+                option(value="") -- Danh mục cha --
+                if(records)
+                    +select-tree(records , 1 , product.parent_id)      
+
+
+        div(class = "form-group")
+            label(for = "desc") Mô tả
+            textarea(
+                name="description"
+                class = "form-control"
+                rows = "5"
+                id = "desc"
+            ) #{product.description}
+
+        div(
+            class = "form-group"
+            upload-image
+        )
+            label(for = "thumbnail") Ảnh 
+            input(
+                type = "text"
+                class = "form-control"
+                id = "thumbnail"
+                name = "thumbnail"
+                upload-image-input
+                value = product.thumbnail
+            )
+            img(src="", alt="" upload-image-preview)
+        div(class = "form-group")
+            label(for = "position") Vị trí
+            input(
+                type = "number"
+                class = "form-control"
+                id = "position"
+                name = "position"
+                placeholder = "Tự động tăng"
+                min = "1"
+                value = product.position
+            )
+        div(class ="form-group form-check form-check-inline")
+            input(
+                type = "radio"
+                class = "form-check-input"
+                id= "statusActive"
+                name = "status"
+                value = "active"
+                checked = (product.status == "active" ? true : false)
+            )
+            label(for = "statusActive" class ="form-check-label") Hoạt động
+        
+        div(class ="form-group form-check form-check-inline")
+            input(
+                type = "radio"
+                class = "form-check-input"
+                id= "statusInactive"
+                name = "status"
+                value = "inactive"
+                checked = (product.status == "inactive" ? true : false)
+            )
+            label(for = "statusInactive" class ="form-check-label") Dừng hoạt động
+        
+        div(class = "form-group")
+            button(
+                type = "submit"
+                class = "btn btn-primary"
+            ) Cập nhật
+
+    script(src="/admin/js/products.js") 
+
+
