@@ -10,7 +10,8 @@ router.post('/create',controller.createPOST)
 // edit
 router.get('/edit/:id',controller.edit)
 router.patch('/edit/:id',controller.editPatch)
-
-
+// permissions
+router.get('/permissions',controller.permissions)
+router.patch('/permissions',controller.permissionsPATCH)
 
 module.exports = router;

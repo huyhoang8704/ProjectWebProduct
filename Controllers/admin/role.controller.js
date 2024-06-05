@@ -48,7 +48,7 @@ const edit = async (req , res) => {
             role : role
         })
     } catch (error) {
-        res.redirect(`${systemConfig.prefixAdmin}/products`)
+        res.redirect(`${systemConfig.prefixAdmin}/roles`)
     }
     
 }
@@ -62,6 +62,43 @@ const editPatch = async (req , res) => {
     }
     res.redirect("back")
 }
+const permissions = async (req , res) => {
+    try {
+        let find = {
+            deleted : false,
+        }
+    
+        const role = await Role.find(find)
+    
+    
+        res.render('admin/pages/roles/permissions.pug' , {
+            pageTitle : "Phân quyền",
+            role : role,
+        })
+    } catch (error) {
+        res.redirect(`${systemConfig.prefixAdmin}/roles`)
+    }
+}
+const permissionsPATCH = async (req , res) => {
+    try {
+        const permissions = JSON.parse(req.body.permissions);
+        // console.log(permissions)
+        for(const item of permissions) {
+            await Role.updateOne(
+                {
+                    _id : item.id,
+                },
+                {
+                    permissions : item.permissions
+                }
+            )
+        }
+        req.flash('success', 'Cập nhật thành công!');
+        res.redirect("back")
+    } catch (error) {
+        req.flash('error', 'Cập nhật thất bại!');
+    }
+}
 
 module.exports = {
     index,
@@ -69,4 +106,6 @@ module.exports = {
     createPOST,
     edit,
     editPatch,
+    permissions,
+    permissionsPATCH,
 }
