@@ -86,6 +86,22 @@ const editPatch = async (req , res) => {
     }
     res.redirect("back")
 }
+const detail = async (req , res) => {
+    try {
+        let find = {
+            deleted : false,
+            _id : req.params.id,
+        }
+
+        const product = await ProductCategory.findOne(find);
+        res.render('admin/pages/products-category/detail.pug' , {
+            pageTitle : product.title,
+            product : product,
+        })
+    } catch (error) {
+        res.redirect(`${systemConfig.prefixAdmin}/products-category`)
+    }
+}
 
 
 module.exports = {
@@ -94,4 +110,5 @@ module.exports = {
     createPOST,
     edit,
     editPatch,
+    detail,
 }

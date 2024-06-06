@@ -19,6 +19,7 @@ router.patch(
     '/edit/:id',
     // validate.editPATCH,
     controller.editPatch)
-
+// detail
+router.get('/detail/:id',controller.detail)
 
 module.exports = router;
