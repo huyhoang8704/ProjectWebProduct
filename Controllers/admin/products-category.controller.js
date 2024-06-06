@@ -95,16 +95,25 @@ const detail = async (req , res) => {
 
 
         const product = await ProductCategory.findOne(find);
-        let findParent = {
-            deleted : false,
-            _id : product.parent_id,
+        if(product.parent_id){
+            let findParent = {
+                deleted : false,
+                _id : product.parent_id,
+            }
+            const productParent = await ProductCategory.findOne(findParent);
+            res.render('admin/pages/products-category/detail.pug' , {
+                pageTitle : product.title,
+                product : product,
+                parent : productParent,
+            })
         }
-        const productParent = await ProductCategory.findOne(findParent);
-        res.render('admin/pages/products-category/detail.pug' , {
-            pageTitle : product.title,
-            product : product,
-            parent : productParent,
-        })
+        else{
+            res.render('admin/pages/products-category/detail.pug' , {
+                pageTitle : product.title,
+                product : product,
+            })
+        }
+
     } catch (error) {
         res.redirect(`${systemConfig.prefixAdmin}/products-category`)
     }
