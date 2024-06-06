@@ -93,10 +93,17 @@ const detail = async (req , res) => {
             _id : req.params.id,
         }
 
+
         const product = await ProductCategory.findOne(find);
+        let findParent = {
+            deleted : false,
+            _id : product.parent_id,
+        }
+        const productParent = await ProductCategory.findOne(findParent);
         res.render('admin/pages/products-category/detail.pug' , {
             pageTitle : product.title,
             product : product,
+            parent : productParent,
         })
     } catch (error) {
         res.redirect(`${systemConfig.prefixAdmin}/products-category`)

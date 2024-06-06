@@ -7,7 +7,7 @@ block main
     h1(class = "mb-4") Chi tiết danh mục sản phẩm của #{product.title}
     
     if(product.parent_id)
-        h1(class = "mb-4") Danh mục cha: <b>#{product.parent_id}</b>
+        h1(class = "mb-4") Danh mục cha: <b>#{parent.title}</b>
 
     if(product.thumbnail)
         div(class = "mb-4")
