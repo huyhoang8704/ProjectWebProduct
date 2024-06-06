@@ -97,9 +97,17 @@ const permissionsPATCH = async (req , res) => {
         res.redirect("back")
     } catch (error) {
         req.flash('error', 'Cập nhật thất bại!');
-    }
+   }
 }
-
+const deleteRole = async (req , res) => {
+    const id = req.params.id
+    await Role.updateOne(
+        {_id : id}, 
+        {deleted : "true"},
+        {deleteAt : new Date()},
+    )
+    res.redirect("back")
+}
 module.exports = {
     index,
     create,
@@ -108,4 +116,5 @@ module.exports = {
     editPatch,
     permissions,
     permissionsPATCH,
+    deleteRole,
 }
