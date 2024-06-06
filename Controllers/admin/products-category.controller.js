@@ -118,7 +118,15 @@ const detail = async (req , res) => {
         res.redirect(`${systemConfig.prefixAdmin}/products-category`)
     }
 }
-
+const deleteItem = async (req , res)  => {
+    const id = req.params.id
+    await ProductCategory.updateOne(
+        {_id : id}, 
+        {deleted : "true"},
+        {deleteAt : new Date()},
+    )
+    res.redirect("back")
+}
 
 module.exports = {
     index,
@@ -127,4 +135,5 @@ module.exports = {
     edit,
     editPatch,
     detail,
+    deleteItem
 }
