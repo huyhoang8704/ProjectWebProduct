@@ -6,6 +6,7 @@ const dashboard = require("./dashboard.route") // import
 const products = require("./product.route") // import
 const productsCategory = require("./products-category.route")
 const roles = require("./role.route")
+const accounts = require("./accounts.route")
 
 module.exports = (app) => {
     const PATH = systemConfig.prefixAdmin
@@ -14,4 +15,5 @@ module.exports = (app) => {
     app.use(PATH + "/products", products);
     app.use(PATH + "/products-category", productsCategory);
     app.use(PATH + "/roles", roles);
+    app.use(PATH + "/accounts", accounts);
 }

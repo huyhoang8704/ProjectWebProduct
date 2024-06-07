@@ -1,0 +1,96 @@
+extends ../../layouts/default.pug  
+include ../../mixins/alert.pug
+include ../../mixins/select-tree.pug
+ 
+
+block main
+    +alert-error(3000)
+    +alert-success(3000)
+    h1(class = "mb-4") Tạo tài khoản 
+    form(
+        action = `${prefixAdmin}/accounts/create`
+        method = "POST"
+    )
+        div(class = "form-group")
+            label(for = "fullname") Họ tên *
+            input(
+                type = "text"
+                class = "form-control"
+                id = "fullname"
+                name = "fullname"
+            )
+        div(class = "form-group")
+            label(for = "email") Email *
+            input(
+                type = "text"
+                class = "form-control"
+                id = "email"
+                name = "email"
+            )
+        div(class = "form-group")
+            label(for = "password") Mật khẩu *
+            input(
+                type = "password"
+                class = "form-control"
+                id = "password"
+                name = "password"
+            )
+
+        div(class = "form-group")
+            label(for = "phone") Số điện thoại
+            input(
+                type = "text"
+                class = "form-control"
+                id = "phone"
+                name = "phone"
+            )
+        div(
+            class = "form-group"
+            upload-image
+        )
+            label(for = "avatar") Avatar
+            input(
+                type = "text"
+                class = "form-control"
+                id = "avatar"
+                name = "avatar"
+                upload-image-input
+            )
+        div(class = "form-group")
+            label(for = "role_id") Phân quyền 
+            select(name = "role_id" id = "role_id" class = "form-control")
+                option(disabled) -- Chọn --
+                each item in role 
+                    option(value =item.id) #{item.title} 
+
+        div(class ="form-group form-check form-check-inline")
+            input(
+                type = "radio"
+                class = "form-check-input"
+                id= "statusActive"
+                name = "status"
+                value = "active"
+                checked
+            )
+            label(for = "statusActive" class ="form-check-label") Hoạt động
+        div(class ="form-group form-check form-check-inline")
+            input(
+                type = "radio"
+                class = "form-check-input"
+                id= "statusInactive"
+                name = "status"
+                value = "inactive"
+                checked
+            )
+            label(for = "statusInactive" class ="form-check-label") Dừng hoạt động
+        
+
+        div(class = "form-group")
+            button(
+                type = "submit"
+                class = "btn btn-primary"
+            ) Tạo mới
+
+    script(src="/admin/js/products.js") 
+
+

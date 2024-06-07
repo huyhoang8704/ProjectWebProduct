@@ -15,7 +15,7 @@ const Account_schema = new mongoose.Schema(
 
         phone : String,
         avatar : String,
-        rold_id : String,
+        role_id : String,
         status : String,
 
 
