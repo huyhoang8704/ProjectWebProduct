@@ -43,10 +43,14 @@ const loginPOST = async (req , res) => {
 
     res.redirect(`${systemConfig.prefixAdmin}/dashboard`)
 }
-
+const logout = async (req, res) => {
+    res.clearCookie("token")
+    res.redirect(`${systemConfig.prefixAdmin}/auth/login`)
+}
 
 
 module.exports = {
     login,
     loginPOST,
+    logout
 }
