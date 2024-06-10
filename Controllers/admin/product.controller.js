@@ -97,6 +97,12 @@ const createPOST = async (req , res) => {
     } else {
         req.body.position = parseInt(req.body.position)
     }
+    // history create data
+    req.body.createdBy ={
+        account_id : res.locals.user.id,
+    }
+
+
     const product = new Product(req.body)
     await product.save();
     req.flash('success', 'Tạo sản phẩm thành công!');

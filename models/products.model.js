@@ -23,6 +23,13 @@ const Product_schema = new mongoose.Schema(
         thumbnail: String,    // Images
         status: String,   // active
         position: Number,
+        createdBy :{
+            account_id : String,
+            createdAt : {
+                type: Date,
+                default: Date.now
+            }
+        },
         deleted: {
             type : Boolean,
             default: false,

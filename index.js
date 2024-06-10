@@ -7,6 +7,7 @@ var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var session = require('express-session')
 var path = require('path')
+var moment = require('moment')   // convert Date
 
 // Mongoose là thằng trung gian để kết nổi với database
 const database = require("./config/database")
@@ -34,6 +35,8 @@ app.use(express.static(`${__dirname}/public`));
 // App local (để pug sử dụng dc)
 const systemconfig = require("./config/system")
 app.locals.prefixAdmin = systemconfig.prefixAdmin
+app.locals.moment = systemconfig.moment
+
 
 //! Route
 const route_client = require('./routes/client/index.route')
