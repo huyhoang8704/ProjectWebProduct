@@ -11,10 +11,15 @@ const createTreeHelpers = require("../../helpers/createTree")
 
 //! [GET] /admin/auth/login
 const login = (req , res) => {
-    res.render('admin/pages/auth/login.pug' , {
-        pageTitle : "Trang đăng nhập Admin"
-    }) 
+    if(req.cookies.token){
+        res.redirect(`${systemConfig.prefixAdmin}/dashboard`)
+    } else {
+        res.render('admin/pages/auth/login.pug' , {
+            pageTitle : "Trang đăng nhập Admin"
+        })
+    }
 }
+//! [POST] /admin/auth/login
 const loginPOST = async (req , res) => {
     const email = req.body.email
     const password = req.body.password
@@ -39,12 +44,12 @@ const loginPOST = async (req , res) => {
         return
     }
 
-    res.cookie("token", user.token) // Dùng để authenticate
+    res.cookie("token", user.token) // Dùng để tạo token => authenticate
 
     res.redirect(`${systemConfig.prefixAdmin}/dashboard`)
 }
 const logout = async (req, res) => {
-    res.clearCookie("token")
+    res.clearCookie("token")   // Xóa token
     res.redirect(`${systemConfig.prefixAdmin}/auth/login`)
 }
 
