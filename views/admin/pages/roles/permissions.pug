@@ -5,7 +5,6 @@ include ../../mixins/alert.pug
 block main
     +alert-error(3000)
     +alert-success(3000)
-
     h1(class = "mb-4") Phân quyền 
 
     if(role)
@@ -32,6 +31,33 @@ block main
                         each item in role 
                             td(class ="text-center")
                                 input(type = "text" value = item.id)
+
+                //- ! Danh sách sản phẩm 
+                tr 
+                    td(clospan = "4")
+                        b Danh sách sản phẩm 
+                    tr(data-name = "products_view")
+                        td Xem
+                        each item in role  
+                            td(class = "text-center")
+                                input(type = "checkbox")
+                    tr(data-name = "products_create")
+                        td Thêm mới
+                        each item in role  
+                            td(class = "text-center")
+                                input(type = "checkbox")
+
+                    tr(data-name = "products_edit")
+                        td Chỉnh sửa 
+                        each item in role  
+                            td(class = "text-center")
+                                input(type = "checkbox")
+
+                    tr(data-name = "products_delete")
+                        td Xóa
+                        each item in role  
+                            td(class = "text-center")
+                                input(type = "checkbox")
                 //- ! Danh muc san pham 
                 tr 
                     td(clospan = "4")
@@ -58,34 +84,6 @@ block main
                         each item in role  
                             td(class = "text-center")
                                 input(type = "checkbox")
-
-                //- ! San pham 
-                tr 
-                    td(clospan = "4")
-                        b Sản phẩm 
-                    tr(data-name = "products_view")
-                        td Xem
-                        each item in role  
-                            td(class = "text-center")
-                                input(type = "checkbox")
-                    tr(data-name = "products_create")
-                        td Thêm mới
-                        each item in role  
-                            td(class = "text-center")
-                                input(type = "checkbox")
-
-                    tr(data-name = "products_edit")
-                        td Chỉnh sửa 
-                        each item in role  
-                            td(class = "text-center")
-                                input(type = "checkbox")
-
-                    tr(data-name = "products_delete")
-                        td Xóa
-                        each item in role  
-                            td(class = "text-center")
-                                input(type = "checkbox")
-
                 //- ! Nhóm quyền
                 tr 
                     td(clospan = "4")
@@ -115,6 +113,32 @@ block main
 
                     tr(data-name = "roles_permissions")
                         td Phân quyền
+                        each item in role  
+                            td(class = "text-center")
+                                input(type = "checkbox")
+                //- ! Danh sách tài khoản
+                tr 
+                    td(clospan = "4")
+                        b Danh sách tài khoản
+                    tr(data-name = "account_view")
+                        td Xem
+                        each item in role  
+                            td(class = "text-center")
+                                input(type = "checkbox")
+                    tr(data-name = "account_create")
+                        td Thêm mới
+                        each item in role  
+                            td(class = "text-center")
+                                input(type = "checkbox")
+
+                    tr(data-name = "account_edit")
+                        td Chỉnh sửa 
+                        each item in role  
+                            td(class = "text-center")
+                                input(type = "checkbox")
+
+                    tr(data-name = "account_delete")
+                        td Xóa
                         each item in role  
                             td(class = "text-center")
                                 input(type = "checkbox")

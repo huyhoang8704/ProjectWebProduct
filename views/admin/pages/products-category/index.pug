@@ -8,33 +8,35 @@ include ../../mixins/table-tree.pug
 //- link(rel="stylesheet", href="/css/te.css")
 block main
     +alert-success(3000)
+    if(role.permissions.includes("products-category_view"))
+        h1 Danh mục sản phẩm 
 
-    h1 Danh mục sản phẩm 
+        .card.mb-3
+            .card-header Danh sách 
+                .card-body 
+                    .row 
+                        .col-8
+                        .col-4
+                            a(
+                                href= `${prefixAdmin}/products-category/create`
+                                class = "btn btn-outline-success"
+                            ) + Thêm mới
 
-    .card.mb-3
-        .card-header Danh sách 
-            .card-body 
-                .row 
-                    .col-8
-                    .col-4
-                        a(
-                            href= `${prefixAdmin}/products-category/create`
-                            class = "btn btn-outline-success"
-                        ) + Thêm mới
-
-                table.table.table-hover.table-sm 
-                    thead 
-                        tr
-                            //- th 
-                                //- input(type="checkbox" class="checkall") 
-                            th STT 
-                            th Hình ảnh 
-                            th Tiêu đề
-                            th Vị trí
-                            th Trạng thái 
-                            th Hành động
-                    tbody
-                       +table-tree(records)
+                    table.table.table-hover.table-sm 
+                        thead 
+                            tr
+                                //- th 
+                                    //- input(type="checkbox" class="checkall") 
+                                th STT 
+                                th Hình ảnh 
+                                th Tiêu đề
+                                th Vị trí
+                                th Trạng thái 
+                                th Hành động
+                        tbody
+                        +table-tree(records)
+    else 
+        h1 Bạn không có quyền truy cập
     
     form(
         action="" 
