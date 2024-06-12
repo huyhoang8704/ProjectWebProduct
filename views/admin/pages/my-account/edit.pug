@@ -1,0 +1,94 @@
+extends ../../layouts/default.pug  
+include ../../mixins/alert.pug
+include ../../mixins/select-tree.pug
+ 
+
+block main
+    +alert-error(3000)
+    +alert-success(3000)
+    h1(class = "mb-4") Chỉnh sửa thông tin cá nhân 
+    form(
+        action = `${prefixAdmin}/my-account/edit?_method=PATCH`
+        method = "POST"
+    )
+        div(class = "form-group")
+            label(for = "fullname") Họ tên *
+            input(
+                type = "text"
+                class = "form-control"
+                id = "fullname"
+                name = "fullname"
+                value = user.fullname
+            )
+        div(class = "form-group")
+            label(for = "email") Email *
+            input(
+                type = "text"
+                class = "form-control"
+                id = "email"
+                name = "email"
+                value = user.email
+            )
+        div(class = "form-group")
+            label(for = "password") Mật khẩu *
+            input(
+                type = "password"
+                class = "form-control"
+                id = "password"
+                name = "password"
+                value = user.password
+            )
+
+        div(class = "form-group")
+            label(for = "phone") Số điện thoại
+            input(
+                type = "text"
+                class = "form-control"
+                id = "phone"
+                name = "phone"
+                value = user.phone
+            )
+        div(
+            class = "form-group"
+            upload-image
+        )
+            label(for = "avatar") Avatar
+            input(
+                type = "text"
+                class = "form-control"
+                id = "avatar"
+                name = "avatar"
+                upload-image-input
+                value = user.avatar
+            )
+
+        div(class ="form-group form-check form-check-inline")
+            input(
+                type = "radio"
+                class = "form-check-input"
+                id= "statusActive"
+                name = "status"
+                value = "active"
+                checked = (user.status == "active" ? true : false)
+            )
+            label(for = "statusActive" class ="form-check-label") Hoạt động
+        
+        div(class ="form-group form-check form-check-inline")
+            input(
+                type = "radio"
+                class = "form-check-input"
+                id= "statusInactive"
+                name = "status"
+                value = "inactive"
+                checked = (user.status == "inactive" ? true : false)
+            )
+            label(for = "statusInactive" class ="form-check-label") Dừng hoạt động
+        
+        div(class = "form-group")
+            button(
+                type = "submit"
+                class = "btn btn-primary"
+            ) Cập nhật
+
+
+
