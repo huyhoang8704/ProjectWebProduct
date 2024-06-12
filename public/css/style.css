@@ -96,15 +96,70 @@
     border-radius: 8px;
 }
 
-
-
-
 a {
     text-decoration: none; /* Loại bỏ gạch chân */
 }
 
 
+/* Sub-menu */
+.sub-menu {
+    position: relative;
+    z-index: 999;
+}
 
+.sub-menu ul {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+    background: white;
+    min-width: 180px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm shadow để đẹp hơn */
+    border-radius: 4px; /* Thêm bo tròn các góc */
+    transition: all 0.3s ease; /* Hiệu ứng chuyển động */
+}
+
+.sub-menu ul li {
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+    transition: background 0.3s ease; /* Hiệu ứng chuyển động màu nền */
+}
+
+.sub-menu ul li:last-child {
+    border-bottom: none; /* Loại bỏ border-bottom của mục cuối cùng */
+}
+
+.sub-menu ul li:hover {
+    background: #f0f0f0; /* Thay đổi màu nền khi di chuột qua */
+}
+
+.sub-menu:hover > ul {
+    display: block;
+}
+
+.sub-menu ul li {
+    position: relative;
+}
+
+.sub-menu ul li ul {
+    right: 100%;
+    top: 0;
+    display: none; /* Ban đầu ẩn sub-sub-menu */
+    border-radius: 4px; /* Thêm bo tròn các góc cho sub-sub-menu */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm shadow */
+}
+
+.sub-menu ul li:hover > ul {
+    display: block;
+}
+
+.sub-menu ul li ul li {
+    white-space: nowrap; /* Không cho phép xuống dòng các mục con */
+    min-width: 180px; /* Đảm bảo độ rộng tối thiểu */
+}
 
 
 
