@@ -22,6 +22,7 @@ const Product_schema = new mongoose.Schema(
         stock: Number,
         thumbnail: String,    // Images
         status: String,   // active
+        featured : String,
         position: Number,
         createdBy :{
             account_id : String,
