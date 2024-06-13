@@ -1,0 +1,6 @@
+include product-item.pug
+
+mixin product-grid(product)
+    .row 
+        each item in product
+            +product-item(item)
