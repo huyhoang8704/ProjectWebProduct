@@ -1,4 +1,6 @@
 const Product = require('../../models/products.model')
+const ProductCategory = require('../../models/products-category.model')
+
 const productHelpers = require("../../helpers/product")
 
 const index = async (req , res) => {
@@ -36,11 +38,43 @@ const detail = async (req , res) => {
         res.redirect(`/products`)
     }
 }
+const category = async (req , res) => {
+    const slug = req.params.slug
+    // console.log(slug)
+    try {
+        const category = await ProductCategory.findOne({
+            slug : slug,
+            deleted : false,
+            status : "active",
+        })
+        const listSubCategory = await productHelpers.getSubCategory(category.id)  // Lấy ra các id con đệ quy
+        const listSubCategoryID = listSubCategory.map(item => item.id); // lấy các ID 
 
+
+        const products = await Product.find({
+            deleted : false,
+            status : "active",
+            product_category_id : {
+                $in : [
+                    category.id,
+                    ...listSubCategoryID
+                ]
+            }
+        })
+    
+        res.render('client/pages/products/index.pug' , {
+            pageTitle : category.title,
+            product : products,
+        }) 
+    } catch (error) {
+        res.redirect(`/products`)
+    }
+}
 
 
 
 module.exports = {
     index,
     detail,
+    category,
 }

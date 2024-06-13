@@ -1,7 +1,9 @@
-mixin sub-menu(items , path)
-    ul 
+mixin sub-menu(items, path)
+    ul
         each item in items
             li
-                a(href = `${path}/${item.slug}`) #{item.title}
+                - let pathProduct = `${path}/${item.slug}`
+                p #{pathProduct}
+                a(href=pathProduct) #{item.title}
                 if item.children && item.children.length > 0
                     +sub-menu(item.children, path)
