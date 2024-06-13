@@ -19,7 +19,7 @@ module.exports.requireAuth = async (req , res, next) => {
                 deleted : false,
             }).select("title permissions")
 
-            res.locals.user = user;
+            res.locals.user = user;   //! locals
             res.locals.role = role;
             next();
         }

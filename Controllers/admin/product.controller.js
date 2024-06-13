@@ -62,13 +62,20 @@ const changeStatus = async (req , res) =>{
 }
 //! [DELETE] /admin/products/delete/:id
 const deleteItem = async (req , res)  => {
-    const id = req.params.id
-    await Product.updateOne(
-        {_id : id}, 
-        {deleted : "true"},
-        {deleteAt : new Date()},
-    )
-    res.redirect("back")
+    const permissions = res.locals.role.permissions
+    if (permissions.includes("products_delete") ) {
+        const id = req.params.id
+        await Product.updateOne(
+            {_id : id}, 
+            {deleted : "true"},
+            {deleteAt : new Date()},
+        )
+        res.redirect("back")
+    } else {
+        res.send("403");
+        return;
+    }
+
 }
 
 //! [GET] /admin/products/create
