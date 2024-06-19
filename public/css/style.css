@@ -174,5 +174,50 @@ a {
 }
 
 
+.product-detail .inner-thumb img {
+    width: 100%;
+    height: auto;
+}
+
+.product-detail .inner-title {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.product-detail .inner-category {
+    margin-bottom: 10px;
+}
+
+.product-detail .inner-price-new {
+    color : green;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.product-detail .inner-price-old{
+    color: red;
+    text-decoration: line-through;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.product-detail .inner-percent {
+    color: white;
+    background: red;
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+.product-detail .inner-stock {
+    font-size: 14px;
+    font-weight: 600;
+    color: green;
+}
+
 
 

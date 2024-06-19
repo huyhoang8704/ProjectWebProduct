@@ -6,6 +6,11 @@ const priceNewProduct = (product) => {
     })
     return product;
 }
+
+const priceNewOneProduct = (product) => {
+    const priceNew = (product.price * (100 - product.discountPercent) / 100).toFixed(0)
+    return priceNew;
+}
 const getSubCategory = async (parentID) =>{
     const getCategory = async (parentID) =>{
         const subs = await ProductCategory.find({
@@ -28,5 +33,6 @@ const getSubCategory = async (parentID) =>{
 
 module.exports = {
     priceNewProduct,
-    getSubCategory
+    getSubCategory,
+    priceNewOneProduct
 }
