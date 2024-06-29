@@ -18,7 +18,7 @@ const index = async (req , res) => {
         // xử lí price new
         newProduct = productHelpers.priceNewProduct(products)
     }
-    console.log(newProduct)
+    // console.log(newProduct)
 
     res.render('client/pages/search/index.pug',{
         pageTitle : "Kết quả tìm kiếm",
