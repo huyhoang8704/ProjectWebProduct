@@ -7,7 +7,29 @@ header.header
                 .inner-logo
                     a(href="/")
                         img(src="/images/bk.jpg", alt="logo")
-            .col-9
+            .col-5 
+                form(
+                    action = "/search"
+                    method = "GET"
+                )
+                    div(
+                        class = "form-group d-flex mb-0"
+                    )
+                        input(
+                            type = "text"
+                            class = "form-control"
+                            name = "keyword"
+                            placeholder = "Tìm kiếm ..."
+                            value = keyword
+                        )
+                        //- http://localhost:3000/search?keyword=iphone 
+                        button(
+                            type = "submit"
+                            class = "btn btn-success"
+                        ) Tìm
+
+            
+            .col-4
                 .inner-menu
                     ul
                         li
