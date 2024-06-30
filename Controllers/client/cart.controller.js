@@ -77,8 +77,30 @@ const addPOST = async (req , res) => {
     req.flash("success" , "Đã thêm sản phẩm vào giỏ hàng")
     res.redirect("back")
 }
+const deleteProduct = async (req , res) => {
+    // console.log(req.params.productId)
+    
+    // How to delete values of array in object using mongoose
+    const cartID = req.cookies.cartID
+    const productId = req.params.productId
+
+    await Cart.updateOne({
+        _id : cartID
+    }, {
+        "$pull" : {
+            products : {
+                "products_id" : productId
+            }
+        }
+    })
+
+
+    req.flash("success", "Xóa sản phẩm thành công")
+    res.redirect("back")
+}
 
 module.exports = {
     index,
     addPOST,
+    deleteProduct,
 }

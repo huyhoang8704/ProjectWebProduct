@@ -42,13 +42,13 @@ block main
                                             value = item.quantity
                                             min = "1"
                                             max = "100"
-                                            product-id = item.product_id
+                                            product-id = item.products_id
                                             style = "width: 60px"
                                         )
                                     td #{item.totalPrice}$
                                     td 
                                         a(
-                                            href =`/cart/delete/${item.product_id}`
+                                            href =`/cart/delete/${item.products_id}`
                                             class = "btn btn-danger"
                                         ) Xóa
 
