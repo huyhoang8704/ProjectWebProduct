@@ -23,4 +23,5 @@ module.exports.cartID = async (req, res, next) =>{
         res.locals.miniCart = cart; 
     }
     next();
+
 } 

@@ -8,8 +8,10 @@ const priceNewProduct = (product) => {
 }
 
 const priceNewOneProduct = (product) => {
-    const priceNew = (product.price * (100 - product.discountPercent) / 100).toFixed(0)
+    const priceNew = (product.price * (100 - product.discountPercentage) / 100).toFixed(0)
     return priceNew;
+
+
 }
 const getSubCategory = async (parentID) =>{
     const getCategory = async (parentID) =>{
