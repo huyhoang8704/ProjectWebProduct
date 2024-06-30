@@ -12,7 +12,15 @@ module.exports.cartID = async (req, res, next) =>{
         });
     }
     else {
+        // Khi đã có giỏ hàng
+        const cart = await Cart.findOne({
+            _id : req.cookies.cartID
+        })
+        // console.log(cart.products.length)
+        cart.totalProduct = cart.products.length
 
+        // public
+        res.locals.miniCart = cart; 
     }
     next();
 } 
