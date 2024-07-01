@@ -106,7 +106,7 @@ const update = async (req , res) => {
 
     await Cart.updateOne(
         {
-            _id : cartId,
+            _id : cartID,
             'products.products_id' : productId,
         },
         {
