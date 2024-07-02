@@ -6,6 +6,7 @@ const homeRoutes = require('./home.route')
 const searchRoutes = require('./search.route')
 const cartRoutes = require('./cart.route')
 const checkoutRoutes = require('./checkout.route')
+const userRoutes = require('./user.route')
 
 module.exports = (app) => {
     app.use(categoryMiddleware.category)  // middleware dùng cho tất cả router
@@ -16,4 +17,5 @@ module.exports = (app) => {
     app.use('/search', searchRoutes);
     app.use('/cart', cartRoutes);
     app.use('/cart/checkout', checkoutRoutes);
+    app.use('/user', userRoutes);
 }
