@@ -16,6 +16,6 @@ router.post('/login',
     validate.loginPOST,
     controller.loginPOST)
 
-
+router.get('/logout',controller.logout)
 
 module.exports = router;

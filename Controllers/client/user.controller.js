@@ -56,10 +56,16 @@ const loginPOST = async (req , res) => {
     req.flash('success', 'Đăng nhận thành công!')
     res.redirect("/")
 }
+const logout = async (req, res) => {
+    res.clearCookie("tokenUser")   // Xóa token
+    res.redirect(`/`)
+}
+
 
 module.exports = {
     register,
     registerPOST,
     login,
     loginPOST,
+    logout,
 }
