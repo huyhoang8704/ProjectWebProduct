@@ -32,6 +32,22 @@ const loginPOST = (req , res , next) => {
     next();  // middleware
 }
 
+const forgotPasswordPOST = (req , res , next) => {
+    if(!req.body.email){
+        req.flash('error', 'Vui lòng nhập email');
+        res.redirect("back")
+        return;
+    }
+    next();
+}
+const otpPOST = (req , res , next) => {
+    if(!req.body.otp){
+        req.flash('error', 'Vui lòng nhập mã OTP');
+        res.redirect("back")
+        return;
+    }
+    next();
+}
 
 
 
@@ -39,4 +55,6 @@ const loginPOST = (req , res , next) => {
 module.exports = {
     registerPOST,
     loginPOST,
+    forgotPasswordPOST,
+    otpPOST,
 }

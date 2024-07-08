@@ -1,4 +1,7 @@
 const User = require('../../models/user.model')
+const Forgotpassword = require('../../models/forgot-password.model')
+
+const generate = require('../../helpers/generate')
 
 const register = async (req , res) => {
     res.render('client/pages/user/register.pug' , {
@@ -60,7 +63,68 @@ const logout = async (req, res) => {
     res.clearCookie("tokenUser")   // Xóa token
     res.redirect(`/`)
 }
+const forgotPassword = async (req, res) => {
+    res.render('client/pages/user/forgot-password.pug' , {
+        pageTitle : "Trang quên mật khẩu",
+    }) 
+}
+const forgotPasswordPOST = async (req, res) => {
+    const email = req.body.email
 
+    const user = await User.findOne({
+        email : email,
+        deleted : false,
+    })
+    if(!user) {
+        req.flash('error', "Email không tồn tại!")
+        res.redirect('back')
+        return
+    }
+    // Việc 1 : Tạo mã OTP và lưu OTP, email vào collection forgot-password
+    const objectForgotPassword = {
+        email : email,
+        otp : generate.generateOTP(5),
+        expireAt : Date.now(),
+    }
+    // console.log(objectForgotPassword)
+    // Lưu vào database
+    const forgotPassword = new Forgotpassword(objectForgotPassword)
+    await forgotPassword.save()
+
+    // Việc 2 : Gửi mã OTP qua email của user , vào trang để nhập mã otp
+    res.redirect(`/user/password/otp?email=${email}`)
+}
+const otpPassword = async (req, res) => {
+    const email = req.query.email
+    // res.send("OK")
+    res.render('client/pages/user/otp-password.pug' , {
+        pageTitle : "Xác Thực OTP",
+        email : email,
+    }) 
+}
+const otpPasswordPOST = async (req, res) => {
+    const email = req.body.email
+    const otp = req.body.otp
+
+    const result = await Forgotpassword.findOne({
+        email : email,
+        otp : otp,
+    })
+
+    if(!result) {
+        req.flash('error', "OTP không hợp lệ!")
+        res.redirect('back')
+        return
+    }
+
+    const user = await User.findOne({
+        email : email,
+        deleted : false,
+    })
+
+    res.cookie("tokenUser",user.tokenUser)
+    res.redirect("/user/password/reset")
+}
 
 module.exports = {
     register,
@@ -68,4 +132,8 @@ module.exports = {
     login,
     loginPOST,
     logout,
+    forgotPassword,
+    forgotPasswordPOST,
+    otpPassword,
+    otpPasswordPOST,
 }
