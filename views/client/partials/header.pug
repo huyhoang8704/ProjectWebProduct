@@ -40,7 +40,9 @@ header.header
                                 +sub-menu(layoutProductCategory, pathProduct)
                         li 
                             a(href="/cart") Giỏ hàng (#{miniCart ? miniCart.totalProduct : "0"})
-                        if(user)
+                        if(user)              
+                            li 
+                                a(href="/user/information") #{user.fullname}
                             li 
                                 a(href="/user/logout") Đăng xuất
                         else 

@@ -157,6 +157,12 @@ const resetPasswordPOST = async (req, res) => {
     res.redirect('/')
 }
 
+const informationUser = async (req, res) => {
+    res.render('client/pages/user/info.pug' , {
+        pageTitle: "Thông tin cá nhân",
+    })
+}
+
 module.exports = {
     register,
     registerPOST,
@@ -169,4 +175,5 @@ module.exports = {
     otpPasswordPOST,
     resetPassword,
     resetPasswordPOST,
+    informationUser,
 }
