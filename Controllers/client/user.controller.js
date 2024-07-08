@@ -125,6 +125,31 @@ const otpPasswordPOST = async (req, res) => {
     res.cookie("tokenUser",user.tokenUser)
     res.redirect("/user/password/reset")
 }
+const resetPassword = async (req, res) => {
+    if(req.cookies.tokenUser){
+        res.render('client/pages/user/reset-password.pug' , {
+            pageTitle: "Reset Password",
+        })
+    } else {
+        res.redirect("/user/login")
+    }
+}
+const resetPasswordPOST = async (req, res) => {
+    const password = req.body.password
+    const confirmPassword = req.body.confirmPassword
+
+    const tokenUser = req.cookies.tokenUser
+
+    await User.updateOne({
+        tokenUser : tokenUser
+    }, {
+        password : password,
+    })
+
+
+    req.flash('success', "Đã đổi mật khẩu thành công !")
+    res.redirect('/')
+}
 
 module.exports = {
     register,
@@ -136,4 +161,6 @@ module.exports = {
     forgotPasswordPOST,
     otpPassword,
     otpPasswordPOST,
+    resetPassword,
+    resetPasswordPOST,
 }

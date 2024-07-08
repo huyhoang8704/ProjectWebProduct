@@ -48,6 +48,26 @@ const otpPOST = (req , res , next) => {
     }
     next();
 }
+const resetPasswordPOST = (req , res , next) => {
+    if(!req.body.password){
+        req.flash('error', 'Vui lòng nhập mật khẩu mới');
+        res.redirect("back")
+        return;
+    }
+    if(!req.body.confirmPassword){
+        req.flash('error', 'Vui lòng xác nhận mật khẩu');
+        res.redirect("back")
+        return;
+    }
+    if(req.body.confirmPassword != req.body.password ){
+        req.flash('error', 'Mật khẩu không trùng khớp!');
+        res.redirect("back")
+        return;
+    }
+    
+
+    next();
+}
 
 
 
@@ -57,4 +77,5 @@ module.exports = {
     loginPOST,
     forgotPasswordPOST,
     otpPOST,
+    resetPasswordPOST,
 }
