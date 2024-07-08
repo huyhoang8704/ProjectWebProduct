@@ -2,6 +2,7 @@ const User = require('../../models/user.model')
 const Forgotpassword = require('../../models/forgot-password.model')
 
 const generate = require('../../helpers/generate')
+const sendMailHelper = require('../../helpers/sendEmail')
 
 const register = async (req , res) => {
     res.render('client/pages/user/register.pug' , {
@@ -92,6 +93,11 @@ const forgotPasswordPOST = async (req, res) => {
     await forgotPassword.save()
 
     // Việc 2 : Gửi mã OTP qua email của user , vào trang để nhập mã otp
+    const subject = "Xác Thực OTP"
+    const html = `Xin chào ${user.fullname} <br> Mã xác thực OTP là:</br>  <b>${objectForgotPassword.otp} </b>`
+    
+    sendMailHelper.sendEmail(email,subject,html);
+
     res.redirect(`/user/password/otp?email=${email}`)
 }
 const otpPassword = async (req, res) => {
