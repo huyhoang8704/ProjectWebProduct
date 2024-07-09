@@ -1,0 +1,76 @@
+extends ../../layouts/default.pug  
+include ../../mixins/alert.pug
+include ../../mixins/select-tree.pug
+ 
+
+block main
+    h1 Thông tin chung của website
+
+    +alert-success(3000)
+    +alert-error(3000)
+
+    form(
+        action = `${prefixAdmin}/settings/general?_method=PATCH`
+        method = "POST"
+    )
+        div(class = "form-group")
+            label(for = "websiteName") Tên website 
+            input(
+                type = "text"
+                class = "form-control"
+                id = "websiteName"
+                name = "websiteName"
+                value = setting.websiteName
+                required
+            )
+        div(class = "form-group")
+            label(for = "logo") Ảnh 
+            input(
+                type = "text"
+                class = "form-control"
+                id = "logo"
+                name = "logo"
+                value = setting.logo
+                required
+            )
+        div(class = "form-group")
+            label(for = "phone") Số điện thoại
+            input(
+                type = "text"
+                class = "form-control"
+                id = "phone"
+                name = "phone"
+                value = setting.phone
+            )
+        div(class = "form-group")
+            label(for = "email") Email 
+            input(
+                type = "text"
+                class = "form-control"
+                id = "email"
+                name = "email"
+                value = setting.email
+            )
+        div(class = "form-group")
+            label(for = "address") Địa chỉ 
+            input(
+                type = "text"
+                class = "form-control"
+                id = "address"
+                name = "address"
+                value = setting.address
+            )
+        div(class = "form-group")
+            label(for = "copyright") Copyright
+            input(
+                type = "text"
+                class = "form-control"
+                id = "copyright"
+                name = "copyright"
+                value = setting.copyright
+            )
+        div(class = "form-group")
+            button(
+                type = "submit"
+                class = "btn btn-primary"
+            ) Cập nhật
