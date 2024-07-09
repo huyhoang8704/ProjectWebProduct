@@ -1,4 +1,5 @@
 const User = require('../../models/user.model')
+const Cart = require('../../models/carts.model')
 const Forgotpassword = require('../../models/forgot-password.model')
 
 const generate = require('../../helpers/generate')
@@ -56,6 +57,18 @@ const loginPOST = async (req , res) => {
         res.redirect('back')
         return
     }
+    // Lưu user_id vào collection cart
+    const user_id = user._id
+    const cartId = req.cookies.cartID
+
+    await Cart.updateOne({
+        _id : cartId,
+    },{
+        user_id : user_id
+    })
+
+    //
+
     res.cookie("tokenUser" , user.tokenUser)
     req.flash('success', 'Đăng nhận thành công!')
     res.redirect("/")
