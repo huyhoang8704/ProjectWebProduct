@@ -44,7 +44,12 @@ const route_admin = require('./routes/admin/index.route')
 route_client(app)
 route_admin(app)
 
-//
+// Trang 404
+app.get("*", (req, res) => {
+    res.render("client/pages/errors/404.pug", {
+        pageTitle : "404 Not Found",
+    })
+})
 
 
 
