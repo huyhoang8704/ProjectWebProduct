@@ -11,6 +11,7 @@ const createTreeHelpers = require("../../helpers/createTree")
 
 //! [GET] /admin/auth/login
 const login = (req , res) => {
+    // Nếu đã đăng nhập rồi thì cho pass qua
     if(req.cookies.token){
         res.redirect(`${systemConfig.prefixAdmin}/dashboard`)
     } else {

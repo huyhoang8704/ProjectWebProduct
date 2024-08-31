@@ -20,7 +20,7 @@ module.exports = (app) => {
     app.use(PATH + "/products-category",authMiddleware.requireAuth, productsCategory);
     app.use(PATH + "/roles",authMiddleware.requireAuth, roles);
     app.use(PATH + "/accounts",authMiddleware.requireAuth, accounts);
-    app.use(PATH + "/auth", authentication);
+    app.use(PATH + "/auth", authentication);   // Trang để đăng nhập nên kh cần authMiddleware
     app.use(PATH + "/my-account",authMiddleware.requireAuth, myAccount);
     app.use(PATH + "/settings",authMiddleware.requireAuth, settings);
 }
