@@ -4,5 +4,7 @@ extends ../../layouts/default.pug
 block main 
     h1 Trang Admin
 
-    p Hello #{user}
-    p Hello #{role}
+    p Thông tin tài khoản #{user}
+    p Các quyền truy cập
+    div #{role.title}
+    div #{role.permissions}
