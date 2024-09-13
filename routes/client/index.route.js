@@ -13,9 +13,10 @@ const userRoutes = require('./user.route')
 
 
 module.exports = (app) => {
-    app.use(categoryMiddleware.category)  // middleware dùng cho tất cả router
-    app.use(cartMiddleware.cartID)
-    app.use(userMiddleware.infoUser)  
+    //! Middleware dùng cho tất cả routes
+    app.use(categoryMiddleware.category)  
+    app.use(cartMiddleware.cartID)        // Middleware dùng để lấy ra thông tin giỏ hàng khi có cookies của user
+    app.use(userMiddleware.infoUser)      // Middleware dùng để lấy ra thông tin của user khi có cookies
 
     app.use('/', homeRoutes)
     app.use('/products', productRoutes);

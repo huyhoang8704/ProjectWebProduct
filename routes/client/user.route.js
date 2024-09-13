@@ -27,6 +27,7 @@ router.post('/password/otp',validate.otpPOST,controller.otpPasswordPOST)
 router.get('/password/reset',controller.resetPassword)
 router.post('/password/reset',validate.resetPasswordPOST,controller.resetPasswordPOST)
 
+// Để vô được trang in4 user -> phải có middleware xem có cookies không
 router.get('/information',authMiddleware.requireAuth,controller.informationUser)
 
 module.exports = router;
